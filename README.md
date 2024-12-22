@@ -1,4 +1,4 @@
-# Microcoleus-classification
+# 16S-MicrocoleusDB
 Benthic cyanobacterial blooms, often linked to anatoxin-a (ATX) production, are increasingly documented in rivers and lakes, with *Microcoleus* (Oscillatoriales) blooms reported frequently.
 
 High-throughput 16S rRNA gene sequencing is a key tool for profiling microbial communities from mat DNA, offering insights into taxonomy and ecology. Accurate identification of *Microcoleus* blooms depends on the use of the most up-to-date databases for precise taxonomic resolution.
