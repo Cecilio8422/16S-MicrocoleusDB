@@ -11,4 +11,15 @@ High-throughput 16S rRNA gene sequencing is an essential tool for studying micro
 * Misclassified *Microcoleus* species (e.g., *Microcoleus vaginatus* and *Microcoleus autumnalis*) previously annotated under the genus *Tychonema* were corrected.
 * Sequences labeled as "uncultured" and assigned to *Tychonema* without any additional reference were removed.
 * The database was augmented with the *Microcoleus* sequences from the 16S-MicrocoleusDB.
+
 This improved SILVA database is fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
+
+```
+qiime feature-classifier extract-reads \
+  --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
+  --p-f-primer AGRGTTYGATYMTGGCTCAG \
+  --p-r-primer RGYTACCTTGTTACGACTT \
+  --p-n-jobs 2 \
+  --p-read-orientation 'forward' \
+  --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza
+```
