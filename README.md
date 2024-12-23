@@ -12,14 +12,19 @@ High-throughput 16S rRNA gene sequencing is an essential tool for studying micro
 * Sequences labeled as "uncultured" and assigned to *Tychonema* without any additional reference were removed.
 * The database was augmented with the *Microcoleus* sequences from the 16S-MicrocoleusDB.
 
-This improved SILVA database is fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
+This improved [SILVA database](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/f18c08bb62bf7455a700f8d892c8eed1e0680f1d/silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza) is fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
+
+
+
+### Creating an amplicon-region-specific Classifier
+To tailor the SILVA database to your specific amplicon region, use the following command to extract sequences corresponding to your primers:
 
 ```
 qiime feature-classifier extract-reads \
   --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
-  --p-f-primer AGRGTTYGATYMTGGCTCAG \
-  --p-r-primer RGYTACCTTGTTACGACTT \
+  --p-f-primer AGRGTTYGATYMTGGCTCAG \ # Replace with your forward primer sequence
+  --p-r-primer RGYTACCTTGTTACGACTT \  # Replace with your reverse primer sequence
   --p-n-jobs 2 \
   --p-read-orientation 'forward' \
-  --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza
+  --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza 
 ```
