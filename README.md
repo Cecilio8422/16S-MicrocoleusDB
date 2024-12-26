@@ -25,8 +25,8 @@ Use the SILVA-corrected database to extract sequences matching your primers:
 ```
 qiime feature-classifier extract-reads \
     --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
-    --p-f-primer AGRGTTYGATYMTGGCTCAG \ # Replace with your forward primer sequence
-    --p-r-primer RGYTACCTTGTTACGACTT \  # Replace with your reverse primer sequence
+    --p-f-primer AGRGTTYGATYMTGGCTCAG # Replace with your forward primer sequence \
+    --p-r-primer RGYTACCTTGTTACGACTT \  # Replace with your reverse primer sequence \
     --p-n-jobs 2 \
     --p-read-orientation 'forward' \
     --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza #change the name according to your data
@@ -55,7 +55,7 @@ qiime feature-classifier fit-classifier-naive-bayes \
 Classify sequences using the trained classifier:
 ```
 qiime feature-classifier classify-sklearn --i-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qza \
-    --i-reads your_sequences.qza \ # Replace with your sequences
+    --i-reads your_sequences.qza # Replace with your sequences \
     --o-classification my_sequences_silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qza # change your name ouput as desired
 ```
 
