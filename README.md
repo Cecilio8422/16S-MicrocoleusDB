@@ -24,32 +24,31 @@ conda activate qiime2-amplicon-2024.10 # change this for your QIIME2 version
 Use the SILVA-corrected database to extract sequences matching your primers:
 ```
 qiime feature-classifier extract-reads \
-  --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
-  --p-f-primer AGRGTTYGATYMTGGCTCAG \ # Replace with your forward primer sequence
-  --p-r-primer RGYTACCTTGTTACGACTT \  # Replace with your reverse primer sequence
-  --p-n-jobs 2 \
-  --p-read-orientation 'forward' \
-  --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza #change the name according to your data
+    --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
+    --p-f-primer AGRGTTYGATYMTGGCTCAG \ # Replace with your forward primer sequence
+    --p-r-primer RGYTACCTTGTTACGACTT \  # Replace with your reverse primer sequence
+    --p-n-jobs 2 \
+    --p-read-orientation 'forward' \
+    --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza #change the name according to your data
 ```
 
 ### Dereplicate
 There are different modes to dereplicate the database, here we will use the 'unique' mode:
 ```
 qiime rescript dereplicate \
-  --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza \
-  --i-taxa silva-138.1-ssu-nr99-tax_corrected_Mc.qza \
-  --p-mode 'uniq' \
-  --o-dereplicated-sequences silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
-  --o-dereplicated-taxa  silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza
+    --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza \
+    --i-taxa silva-138.1-ssu-nr99-tax_corrected_Mc.qza \
+    --p-mode 'uniq' \
+    --o-dereplicated-sequences silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
+    --o-dereplicated-taxa  silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza
 ```
-
 ### Build the Classifier
 Train a Naive Bayes classifier for your amplicon region:
 ```
 qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
-  --i-reference-taxonomy silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza \
-  --o-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qz
+    --i-reference-reads silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
+    --i-reference-taxonomy silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza \
+    --o-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qz
 ```
 
 ### Classifiying your data
