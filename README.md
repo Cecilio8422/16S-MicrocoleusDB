@@ -28,3 +28,14 @@ qiime feature-classifier extract-reads \
   --p-read-orientation 'forward' \
   --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza 
 ```
+
+### Dereplicate
+There are different modes to dereplicate the database, here we will use the 'unique' mode:
+```
+qiime rescript dereplicate \
+  --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza \
+  --i-taxa silva-138.1-ssu-nr99-tax_corrected_Mc.qza \
+  --p-mode 'uniq' \
+  --o-dereplicated-sequences silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
+  --o-dereplicated-taxa  silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza
+```
