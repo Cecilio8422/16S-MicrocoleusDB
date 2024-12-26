@@ -13,11 +13,11 @@ High-throughput 16S rRNA gene sequencing is an essential tool for studying micro
 * Sequences labeled as "uncultured" and assigned to *Tychonema* without any additional reference were removed.
 * The database was augmented with the *Microcoleus* sequences from the 16S-MicrocoleusDB.
 
-The [sequences](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/f18c08bb62bf7455a700f8d892c8eed1e0680f1d/silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza) and [taxonomy](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/f18c08bb62bf7455a700f8d892c8eed1e0680f1d/Microcoleus_16Stax.csv) of this improved SILVA database are fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
+The [sequences](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/f18c08bb62bf7455a700f8d892c8eed1e0680f1d/silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza) and [taxonomy](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/main/silva-138.1-ssu-nr99-tax_corrected_Mc.qza) of this improved SILVA database are fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
 
 ### Activate QIIME2
 ```
-conda activate qiime2-amplicon-2024.10 # change this your QIIME2 version
+conda activate qiime2-amplicon-2024.10 # change this for your QIIME2 version
 ```
 
 ### Create an Amplicon-Region-Specific Classifier
