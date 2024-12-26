@@ -15,46 +15,48 @@ High-throughput 16S rRNA gene sequencing is an essential tool for studying micro
 
 The [sequences](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/f18c08bb62bf7455a700f8d892c8eed1e0680f1d/silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza) and [taxonomy](https://github.com/Cecilio8422/16S-MicrocoleusDB/blob/main/silva-138.1-ssu-nr99-tax_corrected_Mc.qza) of this improved SILVA database are fully compatible with QIIME2 and ensures more precise microbial community profiling, particularly for studies focusing on *Microcoleus*-suspected mats.
 
+
 ### Activate QIIME2
+Activate QIIME (change to version you have installed):
 ```
-conda activate qiime2-amplicon-2024.10 # change this for your QIIME2 version
+conda activate qiime2-amplicon-2024.10
 ```
 
 ### Create an Amplicon-Region-Specific Classifier
-Use the SILVA-corrected database to extract sequences matching your primers:
+Use the SILVA-corrected database to extract sequences matching your primers (make sure to provide your primers and specify the output names):
 ```
 qiime feature-classifier extract-reads \
     --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc.qza \
-    --p-f-primer AGRGTTYGATYMTGGCTCAG \
-    --p-r-primer RGYTACCTTGTTACGACTT \
+    --p-f-primer my_forward_primer \
+    --p-r-primer my_reverse_primer \
     --p-n-jobs 2 \
     --p-read-orientation 'forward' \
-    --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza
+    --o-reads silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-my_primer_f-my_primer_r.qza
 ```
 
 ### Dereplicate
 There are different modes to dereplicate the database, here we will use the 'unique' mode:
 ```
 qiime rescript dereplicate \
-    --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-27f-1492r.qza \
+    --i-sequences silva-138.1-ssu-nr99-seqs_corrected-filt_Mc-my_primer_f-my_primer_r.qza \
     --i-taxa silva-138.1-ssu-nr99-tax_corrected_Mc.qza \
     --p-mode 'uniq' \
-    --o-dereplicated-sequences silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
-    --o-dereplicated-taxa  silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza
+    --o-dereplicated-sequences silva-138.1-ssu-nr99-seqs_corrected_Mc-my_primer_f-my_primer_r-uniq.qza \
+    --o-dereplicated-taxa  silva-138.1-ssu-nr99-tax_corrected_Mc-my_primer_f-my_primer_r-uniq.qza
 ```
 ### Build the Classifier
 Train a Naive Bayes classifier for your amplicon region:
 ```
 qiime feature-classifier fit-classifier-naive-bayes \
-    --i-reference-reads silva-138.1-ssu-nr99-seqs_corrected_Mc-27f-1492r-uniq.qza \
-    --i-reference-taxonomy silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-derep-uniq.qza \
-    --o-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qz
+    --i-reference-reads silva-138.1-ssu-nr99-seqs_corrected_Mc-my_primer_f-my_primer_r-uniq.qza \
+    --i-reference-taxonomy silva-138.1-ssu-nr99-tax_corrected_Mc-my_primer_f-my_primer_r-uniq.qza \
+    --o-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-my_primer_f-my_primer_r-uniq-classifier.qz
 ```
 
 ### Classifiying your data
 Classify sequences using the trained classifier:
 ```
-qiime feature-classifier classify-sklearn --i-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qza \
-    --i-reads your_sequences.qza # Replace with your sequences \
-    --o-classification my_sequences_silva-138.1-ssu-nr99-tax_corrected_Mc-27f-1492r-uniq-classifier.qza
+qiime feature-classifier classify-sklearn --i-classifier silva-138.1-ssu-nr99-tax_corrected_Mc-my_primer_f-my_primer_r-uniq-classifier.qz \
+    --i-reads your_sequences.qza \
+    --o-classification my_sequences_silva-138.1-ssu-nr99-tax_corrected_Mc-my_primer_f-my_primer_r-uniq-classifier.qza
 
